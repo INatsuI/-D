@@ -1,8 +1,7 @@
 const Discord = require ('discord.js');
 const queue = new Map();
-const YTDL = require("ytdl-core");
 const bot = new Discord.Client();
-const ffmpeg = require("ffmpeg-binaries");
+
 
 var prefix = ("O!");
 
@@ -12,23 +11,6 @@ var bienvenuem = ("Bienvenue");
 
 var servers = {};
 
-
-function play(connection, message) {
-    var server = servers[message.guild.id];
-       
-       server.dispatcher = connection.playStream(YTDL(server.queue[0], {filter: "audioonly"}));
-       
-       server.queue.shift();
-       
-       server.dispatcher.on("end", function() {
-        if (server.queue[0]) play(connection, message);
-        else connection.disconnect();
-        var help_embed = new Discord.RichEmbed()
-        .setAuthor("✔ Deconection de la Musique !")
-        .setColor("#77B5FE")
-        message.channel.sendEmbed(help_embed);
-    });
-}
 
 bot.on("guildMemberAdd", member =>{
     if(!member.guild.roles.find('name', role)) return console.log("Role inconnu");
@@ -73,80 +55,6 @@ bot.on("guildMemberRemove", member => {
 
 bot.login(process.env.TOKEN);
 
-bot.on("message", function(message) {
-    if (message.author.equals(bot.user)) return;
-    
-    if (!message.content.startsWith(prefix)) return;
-    
-    var args = message.content.substring(prefix.length).split(" ");
-    
-    switch (args[0].toLowerCase()) {
-        case "play":
-            if (!args[1]) {
-                var help_embed = new Discord.RichEmbed()
-                .setAuthor("❌ Veuillez mettre un lien !")
-                .setColor("#850606")
-                message.channel.sendEmbed(help_embed);             
-                return;
-            }
-            if(!message.member.voiceChannel) {
-                var help_embed = new Discord.RichEmbed()
-                .setAuthor("❌ Vous devez être dans un salon vocal ! !")
-                .setColor("#850606")
-                message.channel.sendEmbed(help_embed);             
-                return;
-            }
-            
-            if(!servers[message.guild.id]) servers[message.guild.id] = {
-                queue: []
-            };
-            
-            var server = servers[message.guild.id];
-      
-            server.queue.push(args[1]);
-            
-            if(!message.guild.voiceConnection) message.member.voiceChannel.join().then(function(connection) {
-               play(connection, message) 
-               var help_embed = new Discord.RichEmbed()
-               .setAuthor("✔ Musique en cours !")
-               .setColor("#77B5FE")
-               message.channel.sendEmbed(help_embed);
-            });
-        break;    
-      
-        case "skip":
-             if(!message.member.voiceChannel) {
-                var help_embed = new Discord.RichEmbed()
-                .setAuthor("❌ Vous devez être dans un salon vocal !")
-                .setColor("#850606")
-                message.channel.sendEmbed(help_embed);   
-                return;
-            }
-            var server = servers[message.guild.id];
-            if(server.dispatcher) server.dispatcher.end();
-            var help_embed = new Discord.RichEmbed()
-            .setAuthor("✔ Musique Skip !")
-            .setColor("#77B5FE")
-            message.channel.sendEmbed(help_embed);
-        break;    
-      
-        case "stop":
-             if(!message.member.voiceChannel) {
-                var help_embed = new Discord.RichEmbed()
-                .setAuthor("❌ Vous devez être dans un salon vocal !")
-                .setColor("#850606")
-                message.channel.sendEmbed(help_embed);             
-                return;
-            }
-             const serverQueue = queue.get(message.guild.id);
-             var server = servers[message.guild.id];
-             if (!serverQueue) return message.channel.send("Aucune musique est joué !")
-            if(message.guild.voiceConnection) message.guild.voiceConnection.disconnect();
-     
-        break;
-        }
-    }
-);
 
 bot.on("message", async function(message) {
     let command = message.content.split(" ")[0];
@@ -290,6 +198,6 @@ bot.on("message", async function(message) {
                 message.channel.sendEmbed(help_embed);   
             }
   
-        };
+        }
 
 }}});
