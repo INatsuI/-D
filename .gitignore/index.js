@@ -71,7 +71,7 @@ bot.on("guildMemberRemove", member => {
 
 });
 
-bot.login("NDM5NTUxNDQyNzk0MTg0NzI0.DcUztw.w9nRAq5JlPLW9hbB4SvVWoKryqI");
+bot.login(process.env.TOKEN);
 
 bot.on("message", function(message) {
     if (message.author.equals(bot.user)) return;
@@ -289,6 +289,6 @@ bot.on("message", async function(message) {
                 .setColor("#77B5FE")
                 message.channel.sendEmbed(help_embed);   
             }
-  
+        }  
 
 }}}});
