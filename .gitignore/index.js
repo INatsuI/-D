@@ -290,6 +290,6 @@ bot.on("message", async function(message) {
                 message.channel.sendEmbed(help_embed);   
             }
   
-        }
+        };
 
 }}});
