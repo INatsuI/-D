@@ -289,6 +289,7 @@ bot.on("message", async function(message) {
                 .setColor("#77B5FE")
                 message.channel.sendEmbed(help_embed);   
             }
-        }  
+  
+        }
 
-}}}});
+}}});
