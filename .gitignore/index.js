@@ -159,4 +159,4 @@ bot.on("message", async function(message) {
         })
     }
 
-});
+}}});
