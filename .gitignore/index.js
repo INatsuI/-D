@@ -45,7 +45,7 @@ bot.on("guildMemberRemove", member => {
     .addField("Il s'agit de : ", `[${member.user.tag}](https://discordapp.com/)`, true)
     .addField(`Nombre de membres après le départ de ${member.user.tag}`, member.guild.memberCount)
     .setTimestamp()
-    member.guild.channels.find("name", "bienvenue").send({embed})
+member.guild.channels.find("name", "bienvenue").send({embed})
 })
 
 });
