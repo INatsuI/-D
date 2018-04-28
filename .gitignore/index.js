@@ -7,14 +7,11 @@ var prefix = ("O!");
 
 var autorole = ("🌀- Visiteur");
 
-var bienvenuem = ("Bienvenue");
-
 var servers = {};
 
 
 bot.on("guildMemberAdd", member =>{
-    if(!member.guild.roles.find('name', role)) return console.log("Role inconnu");
-    member.addRole(member.guild.roles.find('name', autorole));
+    member.addRole(member.guild.roles.find('name', "🌀- Visiteur"));
 })
 
 bot.on('ready', function() {
@@ -35,7 +32,7 @@ bot.on("guildMemberAdd", member => {
       .addField("Comment connaitre mon fonctionnement ? ", "Je t'invite a exécuter la command : " + prefix )
       .addField(`Nombre de membres après l'arrivée de ${member.user.tag}`, member.guild.memberCount)
       .setTimestamp()
-member.guild.channels.find("name", bienvenuem).send({embed})
+member.guild.channels.find("name", "bienvenue").send({embed})
 
 })
 
@@ -48,7 +45,7 @@ bot.on("guildMemberRemove", member => {
     .addField("Il s'agit de : ", `[${member.user.tag}](https://discordapp.com/)`, true)
     .addField(`Nombre de membres après le départ de ${member.user.tag}`, member.guild.memberCount)
     .setTimestamp()
-    member.guild.channels.find("name", bienvenuem).send({embed})
+    member.guild.channels.find("name", "bienvenue").send({embed})
 })
 
 });
@@ -159,4 +156,4 @@ bot.on("message", async function(message) {
         })
     }
 
-}}});
+}});
