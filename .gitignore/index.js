@@ -158,46 +158,5 @@ bot.on("message", async function(message) {
 
         })
     }
-    }
-        if(message.content.startsWith(prefix + "changeprefix")){
-            if(message.member.permissions.has('ADMINISTRATOR')){
-                if(!args[0]) {
-                    var help_embed = new Discord.RichEmbed()
-                    .setAuthor("❌ Erreur : ❌")
-                    .addField("Erreur :", "Veuillez mettre le prefix que vous voulez !")
-                    .setColor("#850606")
-                    message.channel.sendEmbed(help_embed);
-                }
-                if(args[0]) {
-                    prefix = args[0]
-                    var help_embed = new Discord.RichEmbed()
-                    .setAuthor("✔ Succès : ")
-                    .addField("Nouveau prefix :", `${args[0]}`)
-                    .setColor("#77B5FE")
-                    message.channel.sendEmbed(help_embed);               
-                }  
 
-    } 
-
-
-    if(message.content.startsWith(prefix + "messagebienvenue")){
-        if(message.member.permissions.has('ADMINISTRATOR')){
-            if(!args[0]) {
-                var help_embed = new Discord.RichEmbed()
-                .setAuthor("❌ Erreur : ❌")
-                .addField("Erreur :", "Veuillez mettre le channel de bienvenue que vous voulez !")
-                .setColor("#850606")
-                message.channel.sendEmbed(help_embed);
-            }
-            if(args[0]) {
-                bienvenuem = args[0]
-                var help_embed = new Discord.RichEmbed()
-                .setAuthor("✔ Succès : ")
-                .addField("Nouveau channel :", `${args[0]}`)
-                .setColor("#77B5FE")
-                message.channel.sendEmbed(help_embed);   
-            }
-  
-        }
-
-}}});
+});
