@@ -29,7 +29,7 @@ bot.on("guildMemberAdd", member => {
       .setColor('#77B5FE')
       .setAuthor(member.user.tag, member.user.avatarURL)
       .setTitle("Un nouvel utilisateur vient d'arriver", `Il s'agit de [${member.user.tag}](https://discordapp.com/)`, true)
-      .addField("Comment connaitre mon fonctionnement ? ", "Je t'invite a exécuter la command : " + prefix )
+      .addField("Comment connaitre mon fonctionnement ? ", "Je t'invite a exécuter la command : O!Aide" )
       .addField(`Nombre de membres après l'arrivée de ${member.user.tag}`, member.guild.memberCount)
       .setTimestamp()
 member.guild.channels.find("name", "bienvenue").send({embed})
